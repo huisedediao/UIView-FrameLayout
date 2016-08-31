@@ -1,0 +1,2 @@
+# UIView-FrameLayout
+frame相对布局。注意：如果view1参考view2进行布局，则view1和view2必须是兄弟view或者父子view
