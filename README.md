@@ -16,7 +16,7 @@
 <br>
 @implementation ViewController<br>
 <br>
-- (void)viewDidLoad {<br>
+-(void)viewDidLoad {<br>
 [super viewDidLoad];<br>
 <br>
 for (int i=0; i<10; i++)<br>
