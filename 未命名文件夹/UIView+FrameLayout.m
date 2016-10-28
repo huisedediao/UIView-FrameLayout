@@ -7,10 +7,74 @@
 //
 
 #import "UIView+FrameLayout.h"
-#import "UIView+CustomFunctions.h"
-#import "XBDefine.h"
 
 @implementation UIView (FrameLayout)
+
+/**
+ 自身的高度
+ */
+-(CGFloat)xb_height
+{
+    return self.bounds.size.height;
+}
+/**
+ 自身的宽度
+ */
+-(CGFloat)xb_width
+{
+    return self.bounds.size.width;
+}
+
+
+/**
+ 中心点位置
+ */
+-(CGPoint)xb_center
+{
+    return CGPointMake([self xb_left]+[self xb_width]*0.5, [self xb_top]+[self xb_height]*0.5);
+}
+
+
+/**
+ 自身的size
+ */
+-(CGSize)xb_size
+{
+    return CGSizeMake([self xb_width], [self xb_height]);
+}
+
+
+/**
+ 最小的x值
+ */
+-(CGFloat)xb_left
+{
+    return CGRectGetMinX(self.frame);
+}
+
+/**
+ 最大的x值
+ */
+-(CGFloat)xb_right
+{
+    return CGRectGetMaxX(self.frame);
+}
+
+/**
+ 最小的y值
+ */
+-(CGFloat)xb_top
+{
+    return CGRectGetMinY(self.frame);
+}
+
+/**
+ 最大的y值
+ */
+-(CGFloat)xb_bottom
+{
+    return CGRectGetMaxY(self.frame);
+}
 
 /**
  所有subView中,最大的maxX
@@ -70,7 +134,8 @@
     {
         case XBSideLeft:
             
-            if ([self isSubViewOfView:view])
+//            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
             {
                 selfX=space;
             }
@@ -84,9 +149,10 @@
             
         case XBSideRight:
             
-            if ([self isSubViewOfView:view])
+            //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
             {
-                selfX=[view width]+space;
+                selfX=[view xb_width]+space;
             }
             else
             {
@@ -123,7 +189,8 @@
     switch (side)
     {
         case XBSideLeft:
-            if ([self isSubViewOfView:view])
+            //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
             {
                 selfMaxX=space;
             }
@@ -136,9 +203,10 @@
             
             
         case XBSideRight:
-            if ([self isSubViewOfView:view])
+            //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
             {
-                selfMaxX=[view width]+space;
+                selfMaxX=[view xb_width]+space;
             }
             else
             {
@@ -225,7 +293,8 @@
     {
         case XBSideLeft:
             
-            if([self isSubViewOfView:view])
+//            if([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
             {
                 selfMaxX=space;
             }
@@ -239,9 +308,10 @@
             
         case XBSideRight:
             
-            if ([self isSubViewOfView:view])
+            //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
             {
-                selfMaxX=[view width]+space;
+                selfMaxX=[view xb_width]+space;
             }
             else
             {
@@ -283,7 +353,8 @@
     {
         case XBSideTop:
             
-            if ([self isSubViewOfView:view])
+            //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
             {
                 selfY=space;
             }
@@ -298,9 +369,10 @@
             
         case XBSideBottom:
             
-            if ([self isSubViewOfView:view])
+            //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
             {
-                selfY=[view height]+space;
+                selfY=[view xb_height]+space;
             }
             else
             {
@@ -338,7 +410,8 @@
     switch (side)
     {
         case XBSideTop:
-            if ([self isSubViewOfView:view])
+            //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
             {
                 selfMaxY=space;
             }
@@ -352,9 +425,10 @@
             
         case XBSideBottom:
             
-            if ([self isSubViewOfView:view])
+            //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
             {
-                selfMaxY=[view height]+space;
+                selfMaxY=[view xb_height]+space;
             }
             else
             {
@@ -398,7 +472,8 @@
     {
         case XBSideTop:
             
-            if ([self isSubViewOfView:view])
+            //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
             {
                 selfMaxY=space;
             }
@@ -413,9 +488,10 @@
             
         case XBSideBottom:
             
-            if ([self isSubViewOfView:view])
+            //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
             {
-                selfMaxY=[view height]+space;
+                selfMaxY=[view xb_height]+space;
             }
             else
             {
@@ -507,7 +583,8 @@
 {
     CGRect tempRect=self.frame;
     
-    if ([self isSubViewOfView:view])
+    //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
     {
         tempRect.origin.x=0;
     }
@@ -551,9 +628,10 @@
     CGFloat selfW;
     CGFloat selfMaxX;
     
-    if ([self isSubViewOfView:view])
+    //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
     {
-        selfMaxX=[view width];
+        selfMaxX=[view xb_width];
     }
     else
     {
@@ -624,7 +702,8 @@
 {
     CGRect tempRect=self.frame;
     
-    if ([self isSubViewOfView:view])
+    //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
     {
         tempRect.origin.y=0;
     }
@@ -668,9 +747,10 @@
     CGFloat selfH;
     CGFloat selfMaxY;
     
-    if ([self isSubViewOfView:view])
+    //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
     {
-        selfMaxY=[view height];
+        selfMaxY=[view xb_height];
     }
     else
     {
@@ -753,13 +833,14 @@
  */
 -(void)xb_centerEqualToView:(UIView *)view
 {
-    if ([self isSubViewOfView:view])
+    //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
     {
-        CGFloat fatherViewWidth=[view width];
-        CGFloat fatherViewHeight=[view height];
+        CGFloat fatherViewWidth=[view xb_width];
+        CGFloat fatherViewHeight=[view xb_height];
         
-        CGFloat subViewWidth=[self width];
-        CGFloat subViewHeight=[self height];
+        CGFloat subViewWidth=[self xb_width];
+        CGFloat subViewHeight=[self xb_height];
         
         CGFloat subViewX=(fatherViewWidth-subViewWidth)/2;
         CGFloat subViewY=(fatherViewHeight-subViewHeight)/2;
@@ -780,11 +861,12 @@
  */
 -(void)xb_centerXEqualToView:(UIView *)view
 {
-    if ([self isSubViewOfView:view])
+    //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
     {
-        CGFloat fatherViewWidth=[view width];
+        CGFloat fatherViewWidth=[view xb_width];
         
-        CGFloat selfWidth=[self width];
+        CGFloat selfWidth=[self xb_width];
         
         CGFloat selfX=(fatherViewWidth-selfWidth)/2;
         
@@ -814,11 +896,12 @@
  */
 -(void)xb_centerXEqualToView:(UIView *)view multiplier:(CGFloat)multiplier constant:(CGFloat)constant
 {
-    if ([self isSubViewOfView:view])
+    //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
     {
-        CGFloat fatherViewWidth=[view width];
+        CGFloat fatherViewWidth=[view xb_width];
         
-        CGFloat selfWidth=[self width];
+        CGFloat selfWidth=[self xb_width];
         
         CGFloat tempF=fatherViewWidth/2 * multiplier + constant;
         
@@ -847,11 +930,12 @@
  */
 -(void)xb_centerYEqualToView:(UIView *)view
 {
-    if ([self isSubViewOfView:view])
+    //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
     {
-        CGFloat fatherViewHeight=[view height];
+        CGFloat fatherViewHeight=[view xb_height];
         
-        CGFloat selfHeight=[self height];
+        CGFloat selfHeight=[self xb_height];
         
         CGFloat selfY=(fatherViewHeight-selfHeight)/2;
         
@@ -871,6 +955,30 @@
     }
 }
 
+/**
+ centerX;
+ 前提:必须设置了宽度
+ */
+-(void)xb_centerX:(CGFloat)centerX
+{
+    CGFloat w=self.bounds.size.width/2;
+    CGFloat selfCentenX=self.frame.origin.x+w;
+    CGFloat space=centerX-selfCentenX;
+    [self xb_left:CGRectGetMinX(self.frame)+space];
+}
+/**
+ centerY;
+ 前提:必须设置了宽度
+ */
+-(void)xb_centerY:(CGFloat)centerY
+{
+    CGFloat h=self.bounds.size.height/2;
+    CGFloat selfCentenY=self.frame.origin.y+h;
+    CGFloat space=centerY-selfCentenY;
+    [self xb_top:CGRectGetMinY(self.frame)+space];
+}
+
+
 
 /**
  和某个view同centerY;
@@ -881,11 +989,12 @@
  */
 -(void)xb_centerYEqualToView:(UIView *)view multiplier:(CGFloat)multiplier constant:(CGFloat)constant
 {
-    if ([self isSubViewOfView:view])
+    //            if ([self isSubViewOfView:view])
+            if (isSubViewOfView_subV_fatherV(self, view))
     {
-        CGFloat fatherViewHeight=[view height];
+        CGFloat fatherViewHeight=[view xb_height];
         
-        CGFloat selfHeight=[self height];
+        CGFloat selfHeight=[self xb_height];
         
         CGFloat tempF=fatherViewHeight/2 * multiplier + constant;
         
@@ -920,6 +1029,18 @@
     self.frame=tempRect;
 }
 
+/**
+ width上添加的量
+ */
+-(void)xb_widthAdd:(CGFloat)width
+{
+    CGRect tempRect=self.frame;
+    
+    tempRect.size.width+=width;
+    
+    self.frame=tempRect;
+}
+
 
 /**
  设置width
@@ -929,7 +1050,7 @@
  */
 -(void)xb_widthEqualToView:(UIView *)view multiplier:(CGFloat)multiplier constant:(CGFloat)constant
 {
-    CGFloat tempWidth=[view width] * multiplier + constant;
+    CGFloat tempWidth=[view xb_width] * multiplier + constant;
     
     CGRect tempFrame=self.frame;
     
@@ -951,6 +1072,19 @@
     self.frame=tempRect;
 }
 
+/**
+ height上添加的量
+ */
+-(void)xb_heightAdd:(CGFloat)height
+{
+    CGRect tempRect=self.frame;
+    
+    tempRect.size.height+=height;
+    
+    self.frame=tempRect;
+}
+
+
 
 /**
  设置height
@@ -960,7 +1094,7 @@
  */
 -(void)xb_heightEqualToView:(UIView *)view multiplier:(CGFloat)multiplier constant:(CGFloat)constant
 {
-    CGFloat tempHeight=[view height] * multiplier + constant;
+    CGFloat tempHeight=[view xb_height] * multiplier + constant;
     
     CGRect tempFrame=self.frame;
     
@@ -973,7 +1107,7 @@
 /** 高度和宽度相等 */
 -(void)xb_heightEqualToWidthMultiplier:(CGFloat)multiplier constant:(CGFloat)constant
 {
-    CGFloat width=[self width];
+    CGFloat width=[self xb_width];
     
     [self xb_height:(width * multiplier + constant)];
 }
@@ -982,7 +1116,7 @@
 /** 宽度和高度相等 */
 -(void)xb_widthEqualToHeightMultiplier:(CGFloat)multiplier constant:(CGFloat)constant
 {
-    CGFloat height=[self height];
+    CGFloat height=[self xb_height];
     
     [self xb_width:(height * multiplier + constant)];
 }
